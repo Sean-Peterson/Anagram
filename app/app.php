@@ -16,9 +16,11 @@
     });
 
     $app->post("/new", function() use ($app) {
-        $completely_New_Variable = new Ana();
-        $another_Variable = $completely_New_Variable->ClockAngle($_POST["userClock"]);
-        return $app["twig"]->render("result.html.twig", array("result"=>$another_Variable));
+        $newAnagram = new Ana();
+        $searchValues = explode(", ", $_POST['userValues']);
+        // var_dump($searchValues);
+        $result = $newAnagram->AnagramChecker($_POST["userInput"], $searchValues);
+        return $app["twig"]->render("result.html.twig", array("result"=>$result));
     });
 
     return $app;
